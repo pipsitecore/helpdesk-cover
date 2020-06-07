@@ -1,0 +1,142 @@
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for product..">
+
+<table id="myTable">
+<style>
+#myInput {
+    width: 100%; /* Full-width */
+    font-size: 16px; /* Increase font-size */
+    padding: 12px 20px 12px 40px; /* Add some padding */
+    border: 1px solid #9ECEE3; /* Add a sky blue border */
+    margin-bottom: 12px; /* Add some space below the input */
+}
+
+input::placeholder {
+  color: #CBCBCB; /* Add iron grey color to placeholder text */
+}
+
+#myTable {
+    border-collapse: collapse; /* Collapse borders */
+    width: 100%; /* Full-width */
+    border: 1px solid #9ECEE3; /* Add a sky blue border */
+    font-size: 18px; /* Increase font-size */
+}
+
+#myTable th, #myTable td {
+    text-align: left; /* Left-align text */
+    padding: 12px; /* Add padding */
+}
+
+#myTable tr {
+    /* Add a sky blue bottom border to all table rows */
+    border-bottom: 1px solid #9ECEE3; 
+}
+
+#myTable tr.header, #myTable tr:hover {
+    /* Add a white background color to the table header and on hover. And peacock shakespeare blue text */
+    background-color: #FFFFFF;
+	color: #52A8CE;
+}
+</style>
+  <tr class="header">
+    <th style="width:30%;">Name</th>
+	<th style="width:30%;">Email Address</th>
+    <th style="width:40%;">Supported Products</th>
+  </tr>
+  <tr>
+    <td>Alan Haigh</td>
+	<td><a href="mailto:alan.haigh@processflows.co.uk">alan.haigh@processflows.co.uk</a></td>
+    <td>123-TXT				CX-E			Numonix				TeamQ	TMS</td>
+  </tr>
+  <tr>
+    <td>Billy Dunchev</td>
+    	<td><a href="mailto:billy.d@processflows.co.uk">billy.d@processflows.co.uk</a></td>
+    <td>					Equitrac		PrinterOn		SafeCom		</td>
+  </tr>
+  <tr>
+    <td>Chris Scott</td>
+	<td>cscott@processflows.co.uk</td>
+    <td>Autostore					Equitrac			RightFax			</td>
+  </tr>
+  <tr>
+    <td>Daniel Lorek</td>
+	<td>dlorek@processflows.co.uk</td>
+    <td>	Cirrato			eCopy	Equitrac		PrinterOn	RightFax	SafeCom		</td>
+  </tr>
+  <tr>
+    <td>Eddie Deyanov</td>
+	<td>eddie.d@processflows.co.uk</td>
+    <td>									RightFax			</td>
+  </tr>
+  <tr>
+    <td>George Beusmans</td>
+	<td>gbeusmans@processflows.co.uk</td>
+    <td>	Cirrato			eCopy	Equitrac			RightFax			TMS</td>
+  </tr>
+  <tr>
+    <td>Ian Iliev</td>
+	<td>ian.i@processflows.co.uk</td>
+    <td>	Cirrato				Equitrac			RightFax	SafeCom		TMS</td>
+  </tr>
+  <tr>
+    <td>Mark Steward</td>
+	<td>msteward@processflows.co.uk</td>
+    <td>	Cirrato							RightFax			</td>
+  </tr>
+  <tr>
+    <td>Paul Revell</td>
+	<td>prevell@processflows.co.uk</td>
+    <td>	Cirrato			eCopy	Equitrac		PrinterOn	RightFax			</td>
+  </tr>
+  <tr>
+    <td>Paul Walker</td>
+	<td>pwalker@processflows.co.uk</td>
+    <td>		Cloud Fax(Fax2Mail)						RightFax	SafeCom		</td>
+  </tr>
+  <tr>
+    <td>Peter Ivanov</td>
+	<td>peter.i@processflows.co.uk</td>
+    <td>123-TXT	Autostore		Cloud Fax(Fax2Mail)	CX-E			Numonix		RightFax		TeamQ	TMS</td>
+  </tr>
+  <tr>
+    <td>Steve Goodman</td>
+	<td>sgoodman@processflows.co.uk</td>
+    <td>Autostore				eCopy	Equitrac				SafeCom		</td>
+  </tr>
+  <tr>
+    <td>Steve McMahon</td>
+	<td>smcmahon@processflows.co.uk</td>
+    <td>			CX-E			Numonix				TeamQ	</td>
+  </tr>
+  <tr>
+    <td>Victor Dimitrov</td>
+	<td>victor.d@processflows.co.uk</td>
+    <td>123-TXT			Cloud Fax(Fax2Mail)						RightFax			</td>
+  </tr>
+  <script type="text/javascript">
+function myFunction() {
+  // Declare variables 
+  var input, filter, table, tr, td, i, mail1, mail2;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    } 
+  }
+  // Loop through all table rows, and add the emails addresses of the filterred users
+  for (i = 0; i < tr.length; i++) {
+    var mail1 = tr[i].getElementsByTagName("td")[1];
+	mail2 += mail1
+  } 
+}
+</script>
+</table>

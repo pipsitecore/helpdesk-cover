@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" >
+
+<head>
+  <meta charset="UTF-8">
+  <title>Helpdesk Cover</title>
+  
+  
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/css/materialize.css'>
+
+      <link rel="stylesheet" href="css/style.css">
+
+  
+</head>
+
+<body>
+
+  
+<html>
+<head>
+ 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+      
+    <title>Read Engineers</title>
+     
+     
+    <!-- include material design icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+</head>
+<body>
+ 
+<!-- page content and controls will be here -->
+
+<div class="container" ng-app="myApp" ng-controller="volunteersCtrl">
+    <div class="row">
+        <div class="col s12">
+            <h4>Helpdesk Cover</h4>
+            <!-- used for searching the current list -->
+<div class="row">
+        <div style="min-width: 150px" class="input-field col s2 nopad">
+            
+            <select ng-model="selected" ng-change="hasChanged()" ng-options="item.title for item in fieldTable">
+            </select>
+        </div>
+ <div class="input-field col s8 nopad">
+   <input type="text" ng-model="search" class="form-control" placeholder="Search Engineers..." />
+   </div>
+    </div>
+    
+    <div id="email-list" class="modal">
+    <div class="modal-content">
+    	<div class="row">	<b ng-repeat="d in names | filter:filters">{{d.email}}{{$last ? '' : '; '}}</b></div>
+    	</div></div>
+
+
+ <a href="#email-list" class="modal-trigger waves-effect waves-light btn margin-bottom-1em">Copy List of Email Addresses ({{(names | filter:filters).length}})</a>
+ <br>
+ (Do not double click and copy! Please drag & select and then copy.)
+<br>
+ 
+<!-- table that shows volunteer record list -->
+<div style="width: 130px;" class="input-field col s2"><label for="resultlimit"> Results per page: </label></div>
+            
+                   <div style="min-width: 50px;" class="input-field col s1 ">
+   
+    <select name="resultlimit" ng-model="resultlimit" ng-init="resultlimit=20">
+    	<option value="1">1</option>
+      <option value="3">3</option>
+      <option value="5">5</option>
+      <option value="10">10</option>
+       <option value="20">20</option>
+      <option value="100">100</option>
+    </select>
+        </div>   <div class="sorter"><h6 style="display: inline-block;">Order by: </h6>
+       <a  ng-class="{'activetab waves-effect waves-light' : predicate == 'name',  'disabled': predicate != 'name'}" ng-click="predicate = 'name'; reverse=!reverse" class="btn">Name
+       	<i ng-show="predicate == 'name' && !reverse" class="material-icons right">expand_more</i>
+         <i ng-show="predicate == 'name' && reverse" class="material-icons right">expand_less</i></a>
+        <a ng-class="{'activetab waves-effect waves-light' : predicate == 'email',  'disabled': predicate != 'email'}" ng-click="predicate = 'email'; reverse=!reverse" class="btn">Email
+        	<i ng-show="predicate == 'email' && !reverse" class="material-icons right">expand_more</i>
+         <i ng-show="predicate == 'email' && reverse" class="material-icons right">expand_less</i></a>
+        <a ng-class="{'activetab waves-effect waves-light' : predicate == 'status',  'disabled': predicate != 'status'}" ng-click="predicate = 'status'; reverse=!reverse" class="btn">Status
+		<i ng-show="predicate == 'status' && !reverse" class="material-icons right">expand_more</i>
+         <i ng-show="predicate == 'status' && reverse" class="material-icons right">expand_less</i></a>
+         </div>
+        <div class="divider">
+        <hr /></div>
+      <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>   
+            
+   
+<table class="table hoverable bordered">
+ 
+    <thead>
+        <tr>
+            <th ng-class="{'activetab waves-effect waves-light' : predicate == 'id'}" ng-click="predicate = 'id'; reverse=!reverse">ID
+            	<i ng-show="predicate == 'id' && !reverse" class="material-icons right">expand_more</i>
+            	<i ng-show="predicate == 'id' && reverse" class="material-icons right">expand_less</i>
+            	</th>
+            <th ng-class="{'activetab waves-effect waves-light' : predicate == 'name'}"  ng-click="predicate = 'name'; reverse=!reverse">Name
+            	<i ng-show="predicate == 'name' && !reverse" class="material-icons right">expand_more</i>
+            	<i ng-show="predicate == 'name' && reverse" class="material-icons right">expand_less</i>
+            	</th>
+            <th ng-class="{'activetab waves-effect waves-light' : predicate == 'email'}" ng-click="predicate = 'email'; reverse=!reverse" >Email
+            		<i ng-show="predicate == 'email' && !reverse" class="material-icons right">expand_more</i>
+            	<i ng-show="predicate == 'email' && reverse" class="material-icons right">expand_less</i></th>
+            <th ng-class="{'activetab waves-effect waves-light' : predicate == 'status'}" ng-click="predicate = 'status'; reverse=!reverse">Status
+            	            		<i ng-show="predicate == 'status' && !reverse" class="material-icons right">expand_more</i>
+            	<i ng-show="predicate == 'status' && reverse" class="material-icons right">expand_less</i></th>
+        </tr>
+    </thead>
+ 
+    <tbody>
+        <tr dir-paginate="d in names | filter:search | filter:filters | orderBy:'name': ascending| itemsPerPage: resultlimit ">
+            <td>{{ d.id }}</td>
+            <td>{{ d.name }}</td>
+            <td class="breakEmail"><a href="mailto:{{ d.email }}?Subject=Helpdesk%20Cover" target="_blank">{{ d.email }}</a></td>
+            <td>{{ d.status }}</td>
+        </tr>
+    </tbody>
+</table>
+      <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)"></dir-pagination-controls>   
+            
+   
+            
+            
+            
+            
+   
+
+ 
+<!-- include jquery -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+ 
+<!-- material design js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.3/js/materialize.min.js"></script>
+ 
+<!-- include angular js -->
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+ 
+
+</body>
+</html>
+  
+  
+
+    <script  src="js/index.js"></script>
+
+
+
+
+</body>
+
+</html>
